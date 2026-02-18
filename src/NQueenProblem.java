@@ -3,6 +3,7 @@ public class NQueenProblem {
 
     static int n = 0;
     static int solution = 0;
+    static long nodesVisited = 0;
     public static Stack<Position> stack = new Stack<>();
     static int filled = 0;
     static char[][] board;
@@ -29,6 +30,7 @@ public class NQueenProblem {
 
     static void placement() {
 
+        nodesVisited = 1;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 board[i][j] = '-';
@@ -45,6 +47,7 @@ public class NQueenProblem {
 
             if (row < n) {
                 for (int col = nextCol[row]; col < n; col++) {
+                    nodesVisited++;
                     if (isSafe(board, row, col, n)) {
                         board[row][col] = 'Q';
                         stack.push(new Position(row, col));
@@ -82,6 +85,7 @@ public class NQueenProblem {
                 }
             }
         }
+        System.out.println("Total number of nodes visited: " + nodesVisited);
     }
 
     static void print() {
